@@ -1,18 +1,19 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useColorScheme } from 'react-native';
+import { Slot } from 'expo-router';
+import { Text, View } from 'react-native';
 
-import { AnimatedSplashOverlay } from '@/components/animated-icon';
-import AppTabs from '@/components/app-tabs';
+const RootLayout = () => {
 
-SplashScreen.preventAutoHideAsync();
+  // const [] = useFonts({
+  //   academic_m54: require('@/assets/academic_m54/Academic M54.ttf')
+  // })
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <AnimatedSplashOverlay />
-      <AppTabs />
-    </ThemeProvider>
+    <View>
+      <Text>Header</Text>
+      <Slot />
+      <Text>Footer</Text>
+    </View>
   );
 }
+
+export default RootLayout;
