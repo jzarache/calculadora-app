@@ -1,9 +1,11 @@
-import { Colors } from "@/constants/theme";
-import { StyleSheet } from "react-native";
+import { Colors } from "@/constants/Colors";
+import { Dimensions, StyleSheet } from "react-native";
 
-const globalStyle = StyleSheet.create({
+const globalStyles = StyleSheet.create({
     background: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: Colors.background
     },
     calculatorContainer: {
@@ -17,7 +19,13 @@ const globalStyle = StyleSheet.create({
         fontSize: 70,
         textAlign: 'right',
         fontWeight: '600'
+    },
+    subResult: {
+        color: Colors.textSecondary,
+        fontSize: 40,
+        textAlign: 'right',
+        fontWeight: '400'
     }
 })
 
-export { globalStyle };
+export { globalStyles };

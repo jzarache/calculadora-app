@@ -1,55 +1,56 @@
-import ButtonApp from "@/components/ButtonApp";
-import { globalStyle } from "@/styles/globalStyle";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import ButtonApp, { IButtonCalculadora } from "@/components/ButtonApp/ButtonApp";
+import { buttonsApp } from "@/constants/Buttons";
+import { Colors } from "@/constants/Colors";
+import { globalStyles } from "@/styles/globalStyle";
+import { Dimensions, FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 
-const CalculatorAPP = () => {
-  const handlesPressButton = (value: number) => {
-    console.log('El botón me retornó el número:', value); 
+export default function CalculatorAPP() {
+  const handlesPressButton = () => {
+    console.log('Press buttton:');
   }
 
-  const handlesLongPressButton = (value: number) => {
-    console.log('El botón me retornó el número:', value); 
+  const handlesLongPressButton = () => {
+    console.log('LongPress buttton:');
   }
 
-  const numbers = [0,1,2,3,4,5,6,7,8,9]
   return (
-    <View style={ globalStyle.calculatorContainer }>
-      <Text style={globalStyle.mainResult}>
-        550 x 500
-      </Text>
-        {
-          numbers.map(e => {
-            return (
-              <ButtonApp
-              label={e.toString()}
+    <View style={globalStyles.calculatorContainer}>
+      <Text style={globalStyles.mainResult} numberOfLines={4} adjustsFontSizeToFit >20 x 3</Text>
+      <Text style={globalStyles.subResult}>560</Text>
+      <ScrollView contentContainerStyle={styles.gridContainer}>
+        {buttonsApp.map((e, index) => {
+          return (
+            <ButtonApp
+              key={index.toString()}
+              dataBtn={e}
               onPress={handlesPressButton}
               onLongPress={handlesLongPressButton}
-              />
-            )
-          })
-        }      
+              customStyles={styles.gridButton}
+            />
+
+          );
+        })}
+      </ScrollView>
     </View>
   )
 }
 
-const { width } = Dimensions.get('window');
-const COLUMNS = 3;
-const MARGIN = 10;
-const BUTTON_SIZE = (width - (MARGIN * (COLUMNS + 1))) / COLUMNS;
+const { width, height, scale, fontScale } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   gridContainer: {
-    flexDirection: 'row',     // Coloca los elementos en fila
-    flexWrap: 'wrap',         // Hace que salten a la siguiente línea al llenarse
-    justifyContent: 'flex-start', // Alinea los elementos al inicio
-    padding: MARGIN,          // Margen externo del contenedor
+    width: width,
+    flexDirection: 'row',
+    columnGap: 10,
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    padding: 10,
   },
   gridButton: {
-    width: BUTTON_SIZE,       // Ancho exacto para que entren N columnas
-    height: BUTTON_SIZE,      // Cuadrados perfectos (opcional)
-    margin: MARGIN / 2,       // Espaciado uniforme entre botones
-    justifyContent: 'center', 
+    width: 80,
+    height: 65,
+    margin: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-  },
+  }
 });
-export default CalculatorAPP;

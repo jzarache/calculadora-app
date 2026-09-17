@@ -1,15 +1,13 @@
-import { globalStyle } from '@/styles/globalStyle';
+import { globalStyles } from '@/styles/globalStyle';
 import { Slot } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 
-const RootLayout = () => {
+export default function RootLayout() {
   return (
-    <View style={globalStyle.background}>
-      <Slot />
+    <View style={[globalStyles.background]}>
       <StatusBar style='light' />
+      <Slot />
     </View>
   );
 }
-
-export default RootLayout;
